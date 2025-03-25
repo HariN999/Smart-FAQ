@@ -11,7 +11,9 @@ db_config = {
     'password': 'mysql',
     'database': 'smartfaq'
 }
-
+if not os.path.exists('model.pkl'):
+    model_url = 'https://drive.google.com/uc?id=1gB4-RxlQrgNqGeSd2b0VkxAuNPFVtwXW'
+    gdown.download(model_url, 'model.pkl', quiet=False)
 def get_db_connection():
     return mysql.connector.connect(**db_config)
 
