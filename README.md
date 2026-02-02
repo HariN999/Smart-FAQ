@@ -42,7 +42,8 @@ Smart-FAQ solves this problem by using **semantic similarity and NLP techniques*
 Smart-FAQ/
 │
 ├── app.py                # Main Flask application
-├── faq_data.csv / json   # FAQ dataset
+├── data/
+│    └── faq_data.csv / json   # FAQ dataset
 ├── requirements.txt      # Python dependencies
 ├── templates/
 │   └── index.html        # Frontend UI
