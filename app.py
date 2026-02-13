@@ -12,6 +12,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+LOW_CONFIDENCE_THRESHOLD = 0.4
+LOW_CONFIDENCE_MESSAGE = "Sorry, I couldn't find a confident answer. Try rephrasing your question."
+
 
 # -----------------------------
 # Request / Response Schemas
@@ -35,19 +38,21 @@ def root():
 
 @app.post("/ask", response_model=AnswerResponse)
 def ask_question(data: QuestionRequest):
-    """
-    Main semantic FAQ endpoint
-    """
+
     result = get_best_faq(data.question)
 
-    # Support future upgrade where chatbot returns (answer, confidence)
     if isinstance(result, tuple):
         answer, confidence = result
     else:
         answer = result
         confidence = None
 
+    # 🔥 Issue #5 logic
+    if confidence is not None and confidence < LOW_CONFIDENCE_THRESHOLD:
+        answer = LOW_CONFIDENCE_MESSAGE
+
     return {
         "answer": answer,
         "confidence": confidence
     }
+
