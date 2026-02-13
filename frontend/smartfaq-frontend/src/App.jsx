@@ -5,39 +5,51 @@ import AdminPanel from "./components/AdminPanel";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
-  const [view, setView] = useState("chat"); // chat | admin
+  const [view, setView] = useState("chat");
 
   return (
-    <div
-  style={{
-    maxWidth: "800px",
-    margin: "0 auto",
-    padding: "40px",
-    fontFamily: "sans-serif"
-  }}
->
+    <div className="app-container">
+      <header className="app-header">
+        <h1>Smart FAQ</h1>
+        <p className="app-subtitle">
+          Intelligent question answering powered by AI
+        </p>
+      </header>
 
-      <h1>Smart-FAQ</h1>
+      <div className="mode-switch">
+        <button
+          className={`button ${view === "chat" ? "active-mode" : ""}`}
+          onClick={() => setView("chat")}
+          aria-label="Switch to user mode"
+        >
+          💬 User Mode
+        </button>
 
-<div style={{ marginBottom: "20px" }}>
-  <button onClick={() => setView("chat")}>User Mode</button>
-  <button onClick={() => setView("admin")} style={{ marginLeft: "10px" }}>
-    Admin Mode
-  </button>
-</div>
+        <button
+          className={`button ${view === "admin" ? "active-mode" : ""}`}
+          onClick={() => setView("admin")}
+          aria-label="Switch to admin mode"
+        >
+          ⚙️ Admin Mode
+        </button>
+      </div>
 
-{view === "chat" && <ChatBox />}
+      <div className="view-container">
+        {view === "chat" && <ChatBox />}
 
-{view === "admin" && (
-  <>
-    {!token ? (
-      <AdminLogin onLogin={setToken} />
-    ) : (
-      <AdminPanel token={token} />
-    )}
-  </>
-)}
-
+        {view === "admin" && (
+          <>
+            {!token ? (
+              <AdminLogin onLogin={setToken} />
+            ) : (
+              <AdminPanel token={token} onLogout={() => {
+                localStorage.removeItem("token");
+                setToken(null);
+              }} />
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 }
