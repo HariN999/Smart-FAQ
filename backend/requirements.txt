@@ -1,12 +1,26 @@
-flask>=3.0.0
-sentence-transformers>=5.0.0
-torch>=2.2.0
-transformers>=4.41.0
-numpy>=1.26.0
-scikit-learn>=1.5.0
-gunicorn>=21.2.0
-uvicorn>=0.40.0
-fastapi>=0.129.0
-pymongo>=4.8.0
-python-jose>=3.3.0
-passlib[bcrypt]>=1.7.4
+# Web Framework Dependencies
+flask>=3.0.0                    # Flask web framework (not currently used, can be removed)
+fastapi>=0.129.0                # Modern, fast web framework for building APIs
+uvicorn>=0.40.0                 # ASGI server to run FastAPI application
+
+# Machine Learning / NLP Dependencies
+sentence-transformers>=5.0.0    # Pre-trained models for sentence embeddings (semantic search)
+torch>=2.2.0                    # PyTorch - deep learning framework (required by sentence-transformers)
+transformers>=4.41.0            # Hugging Face transformers library (used by sentence-transformers)
+numpy>=1.26.0                   # Numerical computing library (required by ML libraries)
+scikit-learn>=1.5.0             # Machine learning utilities (used by sentence-transformers)
+
+# Database
+pymongo>=4.8.0                  # MongoDB driver for Python
+
+# Authentication & Security
+python-jose>=3.3.0              # JWT token creation and validation
+passlib[bcrypt]>=1.7.4          # Password hashing library (not currently used, but good for future)
+
+# Production Server
+gunicorn>=21.2.0                # Production-grade WSGI server (for Flask, not needed with FastAPI)
+
+# Notes:
+# - flask and gunicorn can be removed since we're using FastAPI with uvicorn
+# - Keep if planning to migrate or run both frameworks
+# - To install: pip install -r requirements.txt
