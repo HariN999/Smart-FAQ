@@ -2,6 +2,19 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from chatbot import get_best_faq
+from auth import create_token, decode_token
+from fastapi import Depends, HTTPException
+from fastapi.security import HTTPBearer
+from jose import jwt
+
+security = HTTPBearer()
+
+def verify_token(credentials=Depends(security)):
+    try:
+        decode_token(credentials.credentials)
+    except Exception:
+        raise HTTPException(status_code=403, detail="Invalid token")
+
 
 app = FastAPI(title="Smart-FAQ API")
 
@@ -56,3 +69,11 @@ def ask_question(data: QuestionRequest):
         "confidence": confidence
     }
 
+@app.post("/admin/login")
+def login():
+    token = create_token("admin")
+    return {"access_token": token}
+
+@app.get("/admin/protected")
+def protected_route(user=Depends(verify_token)):
+    return {"message": "Admin access granted"}
