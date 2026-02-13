@@ -6,41 +6,42 @@ export default function AdminLogin({ onLogin }) {
 
   const handleLogin = async () => {
     setLoading(true);
-    const data = await adminLogin();
-
-    localStorage.setItem("token", data.access_token);
-    onLogin(data.access_token);
-
-    setLoading(false);
+    try {
+      const data = await adminLogin();
+      localStorage.setItem("token", data.access_token);
+      onLogin(data.access_token);
+    } catch (error) {
+      console.error("Login failed:", error);
+      alert("Login failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-  <div
-    style={{
-      marginTop: "20px",
-      padding: "20px",
-      borderRadius: "12px",
-      background: "#1e1e1e",
-      border: "1px solid #333"
-    }}
-  >
-    <h2>Admin Login</h2>
+    <div className="card admin-login">
+      <div style={{ marginBottom: "24px" }}>
+        <div style={{ 
+          fontSize: "48px", 
+          marginBottom: "16px",
+          filter: "grayscale(1) opacity(0.6)"
+        }}>
+          🔐
+        </div>
+        <h2>Admin Access</h2>
+        <p style={{ color: "var(--text-secondary)", marginTop: "8px" }}>
+          Authenticate to manage FAQ content
+        </p>
+      </div>
 
-    <button
-      onClick={handleLogin}
-      style={{
-        padding: "10px 18px",
-        borderRadius: "8px",
-        background: "#4caf50",
-        border: "none",
-        cursor: "pointer",
-        color: "#fff",
-        fontWeight: "bold"
-      }}
-    >
-      {loading ? "Logging in..." : "Login as Admin"}
-    </button>
-  </div>
-);
-
+      <button
+        onClick={handleLogin}
+        className="button"
+        disabled={loading}
+        style={{ minWidth: "200px" }}
+      >
+        {loading ? "Authenticating..." : "🔑 Login as Admin"}
+      </button>
+    </div>
+  );
 }
