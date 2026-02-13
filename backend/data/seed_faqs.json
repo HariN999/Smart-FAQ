@@ -1,0 +1,82 @@
+[
+  {
+    "question": "How do I reset my password?",
+    "answer": "Go to account settings and choose the reset password option."
+  },
+  {
+    "question": "How can I change my email address?",
+    "answer": "Open profile settings and update your email under personal info."
+  },
+  {
+    "question": "How do I delete my account?",
+    "answer": "Navigate to account settings and select delete account."
+  },
+  {
+    "question": "Where can I update my profile information?",
+    "answer": "Profile details can be edited from the user dashboard."
+  },
+  {
+    "question": "How do I cancel my subscription?",
+    "answer": "Go to billing settings and click cancel subscription."
+  },
+  {
+    "question": "Where can I view my payment history?",
+    "answer": "Payment history is available in the billing section."
+  },
+  {
+    "question": "What happens after my plan expires?",
+    "answer": "Your account switches to limited access mode until renewed."
+  },
+  {
+    "question": "How do I ask a question in Smart-FAQ?",
+    "answer": "Type your question in the search box and click ask."
+  },
+  {
+    "question": "What is Smart-FAQ?",
+    "answer": "Smart-FAQ is an AI-powered semantic search system for FAQs."
+  },
+  {
+    "question": "How does semantic search work?",
+    "answer": "It compares meaning using embeddings instead of keywords."
+  },
+  {
+    "question": "Why did I get a low confidence answer?",
+    "answer": "The system may not have enough similar FAQ entries."
+  },
+  {
+    "question": "How can I contact support?",
+    "answer": "Use the help section or contact form to reach support."
+  },
+  {
+    "question": "Where do I report a bug?",
+    "answer": "Bugs can be reported through the support page."
+  },
+  {
+    "question": "Is my data secure?",
+    "answer": "Smart-FAQ uses secure authentication and protected APIs."
+  },
+  {
+    "question": "What is JWT authentication?",
+    "answer": "JWT is used to verify admin access securely."
+  },
+  {
+    "question": "Who can add new FAQs?",
+    "answer": "Only authenticated admins can create FAQ entries."
+  },
+  {
+    "question": "Can admins delete FAQ entries?",
+    "answer": "Yes, admins can manage FAQs from the dashboard."
+  },
+  {
+    "question": "Where are FAQs stored?",
+    "answer": "FAQs are stored in a MongoDB database."
+  },
+  {
+    "question": "Why does Smart-FAQ use embeddings?",
+    "answer": "Embeddings help understand meaning beyond exact words."
+  },
+  {
+    "question": "How is Smart-FAQ different from keyword search?",
+    "answer": "It matches semantic similarity instead of exact phrases."
+  }
+]
