@@ -1,150 +1,203 @@
-# 🚀 Smart-FAQ – AI Powered Question Answering System
+# 🧠 Smart-FAQ
 
-Smart-FAQ is an **AI-powered Frequently Asked Questions (FAQ) system** that uses Natural Language Processing (NLP) to understand user queries and return the most relevant answers from a predefined knowledge base.
-
-It enables organizations to automate customer support, reduce response time, and provide instant, accurate answers to users.
-
----
-
-## 📌 Problem Statement
-
-Traditional FAQ systems rely on keyword matching, which often fails when users phrase questions differently.
-
-Smart-FAQ solves this problem by using **semantic similarity and NLP techniques** so that even if a question is phrased differently, the system can still understand the intent and return the correct answer.
+AI-powered semantic FAQ system built with **FastAPI, React, MongoDB, and SentenceTransformers**.
+Instead of keyword matching, Smart-FAQ understands the *meaning* of a question using embeddings and returns the most relevant answer with a confidence score.
 
 ---
 
-## ✅ Features
+## 🚀 Overview
 
-* Accepts natural language questions
-* Finds the most relevant answer using semantic similarity
-* Easy to extend with new FAQ data
-* Simple and clean interface
-* Fast response time
+Smart-FAQ is a full-stack AI application that allows users to ask natural-language questions and receive intelligent responses from a semantic FAQ database.
+
+The system includes:
+
+* ⚡ FastAPI backend
+* 🎨 React frontend
+* 🔐 JWT-based admin authentication
+* 🧠 Semantic search using embeddings
+* 🍃 MongoDB database
+
+Admins can manage FAQs through a protected dashboard, while users interact with a clean AI-style interface.
+
+---
+
+## ✨ Features
+
+* Semantic question matching (not keyword search)
+* Confidence score with each answer
+* Low-confidence fallback message
+* Admin dashboard (Add/Delete FAQs)
+* JWT-protected routes
+* MongoDB storage
+* Responsive modern UI
+
+---
+
+## 🧠 Architecture
+
+Frontend (React)
+→ sends request to FastAPI
+
+FastAPI Backend
+→ generates embeddings
+→ queries MongoDB
+→ finds best semantic match
+
+MongoDB
+→ stores FAQ documents
+
+Embedding Model
+→ SentenceTransformers (`all-MiniLM-L6-v2`)
 
 ---
 
 ## 🛠 Tech Stack
 
-* **Programming Language:** Python
-* **Backend:** Flask
-* **NLP Libraries:**
+**Frontend**
 
-  * Scikit-learn
-  * NLTK / SpaCy (if used)
-* **Frontend:** HTML, CSS, JavaScript
+* React (Vite)
+* Fetch API
+* CSS (Glass-style UI)
 
----
+**Backend**
 
-## 📂 Project Structure
+* FastAPI
+* Uvicorn
+* SentenceTransformers
+* PyTorch
+* JWT Authentication
 
-```
-Smart-FAQ/
-│
-├── app.py                # Main Flask application
-├── data/
-│    └── faq_data.csv / json   # FAQ dataset
-├── requirements.txt      # Python dependencies
-├── templates/
-│   └── index.html        # Frontend UI
-├── static/
-│   ├── style.css
-│   └── script.js
-└── README.md
-```
+**Database**
+
+* MongoDB
 
 ---
 
-## ⚙️ Installation & Setup
+## ⚙️ Setup Instructions
 
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/HariN999/Smart-FAQ.git
-cd Smart-FAQ
-```
-
-### 2. Create Virtual Environment (Optional but Recommended)
+### 🔧 Backend Setup
 
 ```bash
-python -m venv venv
-source venv/bin/activate     # macOS / Linux
-venv\Scripts\activate        # Windows
-```
-
-### 3. Install Dependencies
-
-```bash
+cd backend
 pip install -r requirements.txt
 ```
 
-### 4. Run the Application
+Start MongoDB locally.
+
+Seed demo data:
 
 ```bash
-python app.py
+python seed_db.py
 ```
 
-### 5. Open in Browser
+Run backend:
 
-```
-http://127.0.0.1:5000
-```
-
----
-
-## 🧪 Example Usage
-
-**User Question:**
-
-```
-How can I reset my password?
+```bash
+uvicorn app:app --reload
 ```
 
-**System Response:**
+API Docs:
 
 ```
-To reset your password, go to settings and click on "Reset Password".
+http://127.0.0.1:8000/docs
 ```
 
 ---
 
-## 📈 Future Enhancements
+### 🎨 Frontend Setup
 
-* Add database instead of file-based FAQ storage
-* Support voice input
-* Multilingual support
-* Integrate transformer-based models (BERT / Sentence Transformers)
-* Admin dashboard to manage FAQs
+```bash
+cd frontend/smartfaq-frontend
+npm install
+npm run dev
+```
 
----
+Frontend runs at:
 
-## 🎯 Learning Outcomes
-
-* Practical experience with NLP
-* Flask backend development
-* Semantic similarity and text preprocessing
-* Building AI-powered web applications
+```
+http://localhost:5173
+```
 
 ---
 
-## 🤝 Contributing
+## 🔌 API Endpoints
 
-Contributions are welcome!
+### Public
 
-1. Fork the repository
-2. Create a new branch
-3. Make your changes
-4. Submit a pull request
+* `GET /` — Health check
+* `POST /ask` — Ask semantic question
+
+### Admin (JWT Protected)
+
+* `POST /admin/login`
+* `GET /admin/faqs`
+* `POST /admin/faqs`
+* `DELETE /admin/faqs/{faq_id}`
 
 ---
 
-## 📜 License
+## 🔐 Admin Access
 
-This project is open-source and available under the **MIT License**.
+Admin authentication uses JWT tokens.
+
+Login through the Admin Mode UI or via:
+
+```
+POST /admin/login
+```
+
+Token is required for protected routes.
 
 ---
 
-## 👨‍💻 Author
+## 🌱 Seed Database
 
-**Hariharan**
-GitHub: [https://github.com/HariN999](https://github.com/HariN999)
+To populate MongoDB with demo FAQs:
+
+```bash
+python seed_db.py
+```
+
+This loads sample FAQs from:
+
+```
+backend/data/seed_faqs.json
+```
+
+---
+
+## 📸 Screenshots
+
+### User Interface
+
+![User UI](screenshots/User.png)
+
+### Admin Dashboard
+
+![Admin UI](screenshots/Admin.png)
+
+### API Documentation
+
+![Swagger](screenshots/Swagger.png)
+
+---
+
+## 🎯 Future Improvements
+
+* Vector database integration
+* Role-based admin permissions
+* FAQ categories and filtering
+* Deployment with Docker
+
+---
+
+## 📄 License
+
+MIT License
+
+---
+
+## 👤 Author
+
+Hariharan Narlakanti
+
