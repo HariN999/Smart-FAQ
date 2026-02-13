@@ -6,6 +6,10 @@ from auth import create_token, decode_token
 from fastapi import Depends, HTTPException
 from fastapi.security import HTTPBearer
 from jose import jwt
+from database import faq_collection
+from fastapi import Body
+from bson import ObjectId
+
 
 security = HTTPBearer()
 
@@ -77,3 +81,23 @@ def login():
 @app.get("/admin/protected")
 def protected_route(user=Depends(verify_token)):
     return {"message": "Admin access granted"}
+
+@app.get("/admin/faqs")
+def get_faqs(user=Depends(verify_token)):
+    faqs = list(faq_collection.find())
+    for f in faqs:
+        f["_id"] = str(f["_id"])
+    return faqs
+
+@app.post("/admin/faqs")
+def add_faq(data: dict = Body(...), user=Depends(verify_token)):
+    faq_collection.insert_one({
+        "question": data["question"],
+        "answer": data["answer"]
+    })
+    return {"message": "FAQ added"}
+
+@app.delete("/admin/faqs/{faq_id}")
+def delete_faq(faq_id: str, user=Depends(verify_token)):
+    faq_collection.delete_one({"_id": ObjectId(faq_id)})
+    return {"message": "FAQ deleted"}
