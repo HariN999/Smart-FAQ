@@ -5,3 +5,5 @@ __pycache__/
 *.pkl
 *.pt
 .DS_Store
+frontend/smartfaq-frontend/node_modules/
+frontend/smartfaq-frontend/dist/
