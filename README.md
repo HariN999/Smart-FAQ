@@ -1,5 +1,7 @@
 # 🧠 Smart-FAQ
 
+> **Full-stack AI semantic search platform with admin dashboard, JWT authentication, and MongoDB integration.**
+
 AI-powered semantic FAQ system built with **FastAPI, React, MongoDB, and SentenceTransformers**.
 Instead of keyword matching, Smart-FAQ understands the *meaning* of a question using embeddings and returns the most relevant answer with a confidence score.
 
@@ -7,59 +9,65 @@ Instead of keyword matching, Smart-FAQ understands the *meaning* of a question u
 
 ## 🚀 Overview
 
-Smart-FAQ is a full-stack AI application that allows users to ask natural-language questions and receive intelligent responses from a semantic FAQ database.
+Smart-FAQ is a modern full-stack AI application that enables users to ask natural-language questions and receive intelligent responses from a semantic FAQ database.
 
 The system includes:
 
 * ⚡ FastAPI backend
-* 🎨 React frontend
+* 🎨 React frontend (Vite)
 * 🔐 JWT-based admin authentication
 * 🧠 Semantic search using embeddings
 * 🍃 MongoDB database
 
-Admins can manage FAQs through a protected dashboard, while users interact with a clean AI-style interface.
+Admins manage FAQs through a protected dashboard, while users interact with a clean AI-powered interface.
 
 ---
 
 ## ✨ Features
 
-* Semantic question matching (not keyword search)
-* Confidence score with each answer
-* Low-confidence fallback message
-* Admin dashboard (Add/Delete FAQs)
-* JWT-protected routes
-* MongoDB storage
-* Responsive modern UI
+* Semantic question matching (embedding-based)
+* Confidence score with each response
+* Low-confidence fallback handling
+* Secure admin dashboard (Add/Delete FAQs)
+* JWT-protected API routes
+* MongoDB-powered storage
+* Responsive glass-style UI
 
 ---
 
 ## 🧠 Architecture
 
-Frontend (React)
-→ sends request to FastAPI
-
+```
+React Frontend
+        ↓
 FastAPI Backend
-→ generates embeddings
-→ queries MongoDB
-→ finds best semantic match
+        ↓
+Embedding Model (SentenceTransformers)
+        ↓
+MongoDB Database
+```
 
-MongoDB
-→ stores FAQ documents
+**Flow**
 
-Embedding Model
-→ SentenceTransformers (`all-MiniLM-L6-v2`)
+1. User sends question from React UI
+2. FastAPI generates embeddings
+3. MongoDB FAQs are compared semantically
+4. Best match + confidence score returned
+
+Embedding Model:
+`all-MiniLM-L6-v2`
 
 ---
 
 ## 🛠 Tech Stack
 
-**Frontend**
+### Frontend
 
 * React (Vite)
 * Fetch API
-* CSS (Glass-style UI)
+* Modern CSS (Glass-style UI)
 
-**Backend**
+### Backend
 
 * FastAPI
 * Uvicorn
@@ -67,7 +75,7 @@ Embedding Model
 * PyTorch
 * JWT Authentication
 
-**Database**
+### Database
 
 * MongoDB
 
@@ -125,7 +133,7 @@ http://localhost:5173
 ### Public
 
 * `GET /` — Health check
-* `POST /ask` — Ask semantic question
+* `POST /ask` — Semantic question endpoint
 
 ### Admin (JWT Protected)
 
@@ -140,7 +148,7 @@ http://localhost:5173
 
 Admin authentication uses JWT tokens.
 
-Login through the Admin Mode UI or via:
+Login via Admin Mode UI or:
 
 ```
 POST /admin/login
@@ -152,13 +160,13 @@ Token is required for protected routes.
 
 ## 🌱 Seed Database
 
-To populate MongoDB with demo FAQs:
+Populate MongoDB with demo FAQs:
 
 ```bash
 python seed_db.py
 ```
 
-This loads sample FAQs from:
+Loads data from:
 
 ```
 backend/data/seed_faqs.json
@@ -186,8 +194,8 @@ backend/data/seed_faqs.json
 
 * Vector database integration
 * Role-based admin permissions
-* FAQ categories and filtering
-* Deployment with Docker
+* FAQ categories & filtering
+* Docker deployment
 
 ---
 
@@ -199,5 +207,4 @@ MIT License
 
 ## 👤 Author
 
-Hariharan Narlakanti
-
+**Hariharan Narlakanti**
