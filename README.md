@@ -1,61 +1,64 @@
+
 # 🧠 Smart-FAQ
 
-> **Full-stack AI semantic search platform with admin dashboard, JWT authentication, and MongoDB integration.**
+> **AI-powered semantic FAQ platform with FastAPI, React, MongoDB, and JWT authentication.**
 
-AI-powered semantic FAQ system built with **FastAPI, React, MongoDB, and SentenceTransformers**.
-Instead of keyword matching, Smart-FAQ understands the *meaning* of a question using embeddings and returns the most relevant answer with a confidence score.
+Smart-FAQ is a full-stack AI application that allows users to ask natural-language questions and receive intelligent responses using semantic similarity instead of traditional keyword matching.
+
+Built using **FastAPI, React, MongoDB, and SentenceTransformers**, the system analyzes the meaning of user queries through embeddings and returns the most relevant FAQ answer with a confidence score.
 
 ---
 
 ## 🚀 Overview
 
-Smart-FAQ is a modern full-stack AI application that enables users to ask natural-language questions and receive intelligent responses from a semantic FAQ database.
-
-The system includes:
+The platform consists of:
 
 * ⚡ FastAPI backend
 * 🎨 React frontend (Vite)
 * 🔐 JWT-based admin authentication
-* 🧠 Semantic search using embeddings
-* 🍃 MongoDB database
+* 🧠 Semantic search with embeddings
+* 🍃 MongoDB integration
 
-Admins manage FAQs through a protected dashboard, while users interact with a clean AI-powered interface.
+Admins can manage FAQs through a protected dashboard, while users interact with a clean AI-powered search interface.
 
 ---
 
 ## ✨ Features
 
-* Semantic question matching (embedding-based)
-* Confidence score with each response
-* Low-confidence fallback handling
-* Secure admin dashboard (Add/Delete FAQs)
-* JWT-protected API routes
-* MongoDB-powered storage
-* Responsive glass-style UI
+* Semantic FAQ search using embeddings
+* Confidence score for responses
+* Fallback handling for low-confidence matches
+* Secure admin dashboard for FAQ management
+* JWT-protected admin APIs
+* MongoDB-based storage
+* Responsive modern UI
 
 ---
 
 ## 🧠 Architecture
 
-```
+```text
 React Frontend
         ↓
 FastAPI Backend
         ↓
-Embedding Model (SentenceTransformers)
+SentenceTransformer Embeddings
         ↓
 MongoDB Database
+````
+
+### Request Flow
+
+1. User submits a question from the frontend
+2. FastAPI generates embeddings for the query
+3. Stored FAQ embeddings are compared semantically
+4. Best-matching answer and confidence score are returned
+
+### Embedding Model
+
+```text
+all-MiniLM-L6-v2
 ```
-
-**Flow**
-
-1. User sends question from React UI
-2. FastAPI generates embeddings
-3. MongoDB FAQs are compared semantically
-4. Best match + confidence score returned
-
-Embedding Model:
-`all-MiniLM-L6-v2`
 
 ---
 
@@ -65,7 +68,7 @@ Embedding Model:
 
 * React (Vite)
 * Fetch API
-* Modern CSS (Glass-style UI)
+* Modern CSS UI
 
 ### Backend
 
@@ -92,21 +95,21 @@ pip install -r requirements.txt
 
 Start MongoDB locally.
 
-Seed demo data:
+Seed demo FAQ data:
 
 ```bash
 python seed_db.py
 ```
 
-Run backend:
+Run the backend server:
 
 ```bash
 uvicorn app:app --reload
 ```
 
-API Docs:
+API Documentation:
 
-```
+```text
 http://127.0.0.1:8000/docs
 ```
 
@@ -120,9 +123,9 @@ npm install
 npm run dev
 ```
 
-Frontend runs at:
+Frontend URL:
 
-```
+```text
 http://localhost:5173
 ```
 
@@ -130,12 +133,12 @@ http://localhost:5173
 
 ## 🔌 API Endpoints
 
-### Public
+### Public Routes
 
 * `GET /` — Health check
-* `POST /ask` — Semantic question endpoint
+* `POST /ask` — Semantic question answering
 
-### Admin (JWT Protected)
+### Admin Routes (JWT Protected)
 
 * `POST /admin/login`
 * `GET /admin/faqs`
@@ -144,31 +147,31 @@ http://localhost:5173
 
 ---
 
-## 🔐 Admin Access
+## 🔐 Authentication
 
-Admin authentication uses JWT tokens.
+Admin access is secured using JWT authentication.
 
-Login via Admin Mode UI or:
+Admins can log in through the admin UI or using:
 
-```
+```text
 POST /admin/login
 ```
 
-Token is required for protected routes.
+JWT tokens are required for protected admin routes.
 
 ---
 
 ## 🌱 Seed Database
 
-Populate MongoDB with demo FAQs:
+Populate MongoDB with sample FAQs:
 
 ```bash
 python seed_db.py
 ```
 
-Loads data from:
+Data source:
 
-```
+```text
 backend/data/seed_faqs.json
 ```
 
@@ -193,9 +196,10 @@ backend/data/seed_faqs.json
 ## 🎯 Future Improvements
 
 * Vector database integration
-* Role-based admin permissions
-* FAQ categories & filtering
-* Docker deployment
+* Role-based access control
+* FAQ categorization and filtering
+* Docker deployment support
+* Multi-language support
 
 ---
 
